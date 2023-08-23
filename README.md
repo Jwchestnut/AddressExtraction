@@ -21,8 +21,13 @@ This script is designed to update an Excel file with extracted addresses, ZIP co
 ### Functionality
 By utilizing the `extract_address` function from `address_extractor.py`, the script extracts street addresses from the 'Original_Address' column. It also extracts ZIP codes using regex and queries the corresponding city and state using a ZIP code mapping file.
 
+## Common US Street Types (Version 1.0)
+This repository includes a CSV file (`street_types_v1.0.csv`) containing a list of common United States street types and their abbreviations. The CSV file is structured with two columns, one for the street type and the other for the abbreviation. It includes types such as Street (St.), Avenue (Ave.), Boulevard (Blvd.), and more.
+
 ### Unique Features
 The script integrates with `address_extractor.py` and handles Excel workbook operations, allowing for automated updates to lot cards with accurate address information.
 
 ### Considerations
 As this is the initial version (1.0), future updates may include optimizations, support for additional Excel formats, and integration with other components of the project.
+
+
