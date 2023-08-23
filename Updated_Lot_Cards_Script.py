@@ -1,3 +1,5 @@
+# Version: 1.0
+# Description: Initial version of the script for updating lot cards with extracted addresses, ZIP codes, cities, and states.
 from openpyxl import load_workbook
 import re
 import pandas as pd
