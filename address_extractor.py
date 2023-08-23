@@ -1,3 +1,5 @@
+# Version: 1.0
+# Description: Initial version of the address extractor script. This version includes a manual approach to identify street addresses by finding street indicators and capturing relevant information.
 # Manual approach to identify the street address by finding the street indicator and capturing everything to the left through the first set of numerical digits followed by a space
 
 # List of street indicators
