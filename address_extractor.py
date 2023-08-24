@@ -1,37 +1,55 @@
-# Version: 1.0
-# Description: Initial version of the address extractor script. This version includes a manual approach to identify street addresses by finding street indicators and capturing relevant information.
-# Manual approach to identify the street address by finding the street indicator and capturing everything to the left through the first set of numerical digits followed by a space
+# Version: 1.1
+# Description: Initial version of the script for updating lot cards with extracted addresses, ZIP codes, cities, and states.
+from openpyxl import load_workbook
+import re
+import pandas as pd
+import sys
 
-# List of street indicators
-street_indicators = ["Road", "Rd.", "Street", "St.", "Court", "Circle", "Ave.", "Avenue", "Blvd.", "Boulevard", "Drive", "Dr."]
+# Add the path to the directory where address_extractor.py is located
+path_to_address_extractor = r"C:\MAC-009 Test\MAC-009 Files\AddressExtraction"
+sys.path.append(path_to_address_extractor)
 
-# Function to extract the address using the manual approach
-def extract_address(line):
-    # Loop through the street indicators to find a match
-    for indicator in street_indicators:
-        # Find the position of the street indicator
-        indicator_pos = line.find(indicator)
-        if indicator_pos != -1:
-            # Extract everything to the left of the street indicator
-            left_part = line[:indicator_pos]
-            # Split the left part into words and reverse the order
-            words = left_part.split()[::-1]
-            # Initialize the address with the street indicator
-            address = [indicator]
-            # Loop through the words, adding them to the address until a word containing only digits is found
-            for word in words:
-                if word.isdigit():
-                    # Add the word containing only digits and stop
-                    address.append(word)
-                    break
-                # Add other words to the address
-                address.append(word)
-            # Reverse the address to the original order and join it into a string
-            address_str = " ".join(address[::-1])
-            return address_str
-    return "No match found"
+from address_extractor import extract_address
 
-# Example usage
-first_line = "#573 Jeanette John owner 10 Mountain Laurels Drive #101 Nashua NH 03062"
-manual_street_address = extract_address(first_line)
-print("Extracted Address:", manual_street_address)
+# Define the file path for the target Excel file
+file_path = r"C:\MAC-009 Test\MAC-009 Files\AddressExtraction\Working Files\Lot Cards - Trilagen.xlsx"
+
+# Path to the ZIP code mapping file
+zip_mapping_file = r"C:\MAC-009 Test\MAC-009 Files\AddressExtraction\Working Files\ZIP_Locale_Detail.xls"
+
+# Read the ZIP code mapping file into a DataFrame
+zip_mapping_df = pd.read_excel(zip_mapping_file)
+
+# Convert the 'PHYSICAL ZIP', 'PHYSICAL CITY', and 'PHYSICAL STATE' columns into a dictionary
+zip_mapping = dict(zip(zip_mapping_df['PHYSICAL ZIP'], zip_mapping_df['PHYSICAL CITY'] + ", " + zip_mapping_df['PHYSICAL STATE']))
+
+# Load the Excel workbook
+workbook = load_workbook(filename=file_path)
+
+# Access the specific worksheet
+worksheet = workbook.active
+
+# Iterate through the 'Original_Address' column (column D, skipping the header row)
+for row, cell in enumerate(worksheet['D'][1:]):
+    # Extract the street address using the imported function
+    address = extract_address(str(cell.value))
+    
+    # Write the street address to the corresponding 'Street' cell in column M
+    worksheet[f'M{row + 2}'] = address
+
+    # Extract the ZIP code using regex (ignoring strings that start with "#")
+    zip_code_match = re.search(r' \d{5}\b', str(cell.value))
+    if zip_code_match and not str(cell.value).startswith("#"):
+        zip_code = zip_code_match.group(0).strip()
+        
+        # Write ZIP code to 'Zip' cell in column N
+        worksheet[f'N{row + 2}'] = zip_code
+        
+        # Query city and state using ZIP code and write to 'City' and 'State' cells in columns O and P
+        city_state = zip_mapping.get(int(zip_code), 'Not found').split(", ")
+        worksheet[f'O{row + 2}'] = city_state[0] # City
+        worksheet[f'P{row + 2}'] = city_state[1] # State
+
+# Save the modified Excel file
+output_path = r"C:\MAC-009 Test\MAC-009 Files\AddressExtraction\Modified_Lot_Cards_Trilagen.xlsx"
+workbook.save(filename=output_path)
