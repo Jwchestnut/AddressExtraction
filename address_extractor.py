@@ -3,13 +3,11 @@
 from openpyxl import load_workbook
 import re
 import pandas as pd
-import sys
 
-# Add the path to the directory where address_extractor.py is located
-path_to_address_extractor = r"C:\MAC-009 Test\MAC-009 Files\AddressExtraction"
-sys.path.append(path_to_address_extractor)
-
-from address_extractor import extract_address
+# Define the extract_address function here
+def extract_address(address_string):
+    # Your code to extract the address goes here
+    pass
 
 # Define the file path for the target Excel file
 file_path = r"C:\MAC-009 Test\MAC-009 Files\AddressExtraction\Working Files\Lot Cards - Trilagen.xlsx"
