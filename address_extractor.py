@@ -1,5 +1,6 @@
 # Version: 1.1
 # Description: Initial version of the script for updating lot cards with extracted addresses, ZIP codes, cities, and states.
+feature/zip_code
 # List of street indicators
 street_indicators = ["Road", "Rd., "Street", "St.", "Court", "Ct.", "Circle", "Cir.", "Avenue", "Ave.", "Boulevard", "Blvd.", "Drive", "Dr.", "Lane", "Ln.", "Place", "Pl.", "Terrace", "Ter.", "Highway", "Hwy.", "Parkway", "Pkwy.", "Alley", "Aly.", "Freeway", "Fwy.", "Expressway", "Expy.", "Trail", "Trl.", "Way", "Way", "Square", "Sq.", "Loop", "Loop"]
 
@@ -34,6 +35,7 @@ from openpyxl import load_workbook
 import re
 import pandas as pd
 
+
 # Define the file path for the target Excel file
 file_path = r"C:\MAC-009 Test\MAC-009 Files\AddressExtraction\Working Files\Lot Cards - Trilagen.xlsx"
 
@@ -54,15 +56,19 @@ worksheet = workbook.active
 
 # Iterate through the 'Original_Address' column (column D, skipping the header row)
 for row, cell in enumerate(worksheet['D'][1:]):
+feature/zip_code
     # Extract the street address using the extract_address function
+
     address = extract_address(str(cell.value))
     
     # Write the street address to the corresponding 'Street' cell in column M
     worksheet[f'M{row + 2}'] = address
 
+feature/zip_code
     # Continue with the rest of the code as previously described...
 
 # Save the modified Excel file
 output_path = r"C:\MAC-009 Test\MAC-009 Files\AddressExtraction\Working Files\Modified_Lot_Cards_Trilagen.xlsx"
 workbook.save(filename=output_path)
+
 
