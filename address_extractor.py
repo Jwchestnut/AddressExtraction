@@ -2,7 +2,7 @@
 # Description: Initial version of the script for updating lot cards with extracted addresses, ZIP codes, cities, and states.
 feature/zip_code
 # List of street indicators
-street_indicators = ["Road", "Rd., "Street", "St.", "Court", "Ct.", "Circle", "Cir.", "Avenue", "Ave.", "Boulevard", "Blvd.", "Drive", "Dr.", "Lane", "Ln.", "Place", "Pl.", "Terrace", "Ter.", "Highway", "Hwy.", "Parkway", "Pkwy.", "Alley", "Aly.", "Freeway", "Fwy.", "Expressway", "Expy.", "Trail", "Trl.", "Way", "Way", "Square", "Sq.", "Loop", "Loop"]
+street_indicators = ["Road", "Rd.", "Street", "St.", "Court", "Ct.", "Circle", "Cir.", "Avenue", "Ave.", "Boulevard", "Blvd.", "Drive", "Dr.", "Lane", "Ln.", "Place", "Pl.", "Terrace", "Ter.", "Highway", "Hwy.", "Parkway", "Pkwy.", "Alley", "Aly.", "Freeway", "Fwy.", "Expressway", "Expy.", "Trail", "Trl.", "Way", "Way", "Square", "Sq.", "Loop", "Loop"]
 
 # Function to extract the address using the manual approach
 def extract_address(line):
@@ -37,7 +37,7 @@ import pandas as pd
 
 
 # Define the file path for the target Excel file
-file_path = r"C:\MAC-009 Test\MAC-009 Files\AddressExtraction\Working Files\Lot Cards - Trilagen.xlsx"
+file_path = r"C:\MAC-009 Test\MAC-009 Files\AddressExtraction\Working Files\lotcards-trilagen.csv"
 
 # Path to the ZIP code mapping file
 zip_mapping_file = r"C:\MAC-009 Test\MAC-009 Files\AddressExtraction\Working Files\ZIP_Locale_Detail.xls"
