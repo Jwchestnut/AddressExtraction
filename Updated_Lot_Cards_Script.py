@@ -12,7 +12,7 @@ sys.path.append(path_to_address_extractor)
 from address_extractor import extract_address
 
 # Define the file path for the target Excel file
-file_path = r"C:\MAC-009 Test\MAC-009 Files\AddressExtraction\Working Files\lotcards-trilagen.csv"
+file_path = r"C:\MAC-009 Test\MAC-009 Files\AddressExtraction\Working Files\lotcards-trilagen.xlsx"
 
 # Path to the ZIP code mapping file
 zip_mapping_file = r"C:\MAC-009 Test\MAC-009 Files\AddressExtraction\Working Files\ZIP_Locale_Detail.xls"
@@ -33,7 +33,7 @@ worksheet = workbook.active
 for row, cell in enumerate(worksheet['D'][1:]):
     # Extract the street address using the imported function
     address = extract_address(str(cell.value))
-    
+
     # Write the street address to the corresponding 'Street' cell in column M
     worksheet[f'M{row + 2}'] = address
 
@@ -41,10 +41,10 @@ for row, cell in enumerate(worksheet['D'][1:]):
     zip_code_match = re.search(r' \d{5}\b', str(cell.value))
     if zip_code_match and not str(cell.value).startswith("#"):
         zip_code = zip_code_match.group(0).strip()
-        
+
         # Write ZIP code to 'Zip' cell in column N
         worksheet[f'N{row + 2}'] = zip_code
-        
+
         # Query city and state using ZIP code and write to 'City' and 'State' cells in columns O and P
         city_state = zip_mapping.get(int(zip_code), 'Not found').split(", ")
         worksheet[f'O{row + 2}'] = city_state[0] # City
