@@ -1,7 +1,7 @@
 # Version: 1.1
 # Description: Initial version of the script for updating lot cards with extracted addresses, ZIP codes, cities, and states.
 # List of street indicators
-street_indicators = ["Road", "Rd.", "Street", "St.", "Court", "Circle", "Ave.", "Avenue", "Blvd.", "Boulevard", "Drive", "Dr."]
+street_indicators = ["Road", "Rd., "Street", "St.", "Court", "Ct.", "Circle", "Cir.", "Avenue", "Ave.", "Boulevard", "Blvd.", "Drive", "Dr.", "Lane", "Ln.", "Place", "Pl.", "Terrace", "Ter.", "Highway", "Hwy.", "Parkway", "Pkwy.", "Alley", "Aly.", "Freeway", "Fwy.", "Expressway", "Expy.", "Trail", "Trl.", "Way", "Way", "Square", "Sq.", "Loop", "Loop"]
 
 # Function to extract the address using the manual approach
 def extract_address(line):
