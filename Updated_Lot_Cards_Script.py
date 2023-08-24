@@ -6,7 +6,7 @@ import pandas as pd
 import sys
 
 # Add the path to the directory where address_extractor.py is located
-path_to_address_extractor = r"C:\MAC-009 Test\MAC-009 Files\AddressExtraction\scripts"
+path_to_address_extractor = r"C:\MAC-009 Test\MAC-009 Files\AddressExtraction"
 sys.path.append(path_to_address_extractor)
 
 from address_extractor import extract_address
