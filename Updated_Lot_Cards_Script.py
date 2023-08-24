@@ -1,21 +1,21 @@
-# Version: 1.0
-# Description: Initial version of the script for updating lot cards with extracted addresses, ZIP codes, cities, and states.
+# Version: 1.1
+# Description: Updated version of the script for updating lot cards with extracted addresses, ZIP codes, cities, and states.
 from openpyxl import load_workbook
 import re
 import pandas as pd
 import sys
 
 # Add the path to the directory where address_extractor.py is located
-path_to_address_extractor = r"C:\MAC-009 Test\MAC-009 Files"
+path_to_address_extractor = r"C:\MAC-009 Test\MAC-009 Files\AddressExtraction\scripts"
 sys.path.append(path_to_address_extractor)
 
 from address_extractor import extract_address
 
 # Define the file path for the target Excel file
-file_path = r"C:\MAC-009 Test\MAC-009 Files\Lot Cards - Trilagen.xlsx"
+file_path = r"C:\MAC-009 Test\MAC-009 Files\AddressExtraction\Working Files\Lot Cards - Trilagen.xlsx"
 
 # Path to the ZIP code mapping file
-zip_mapping_file = r"C:\MAC-009 Test\MAC-009 Files\ZIP_Locale_Detail.xls"
+zip_mapping_file = r"C:\MAC-009 Test\MAC-009 Files\AddressExtraction\Working Files\ZIP_Locale_Detail.xls"
 
 # Read the ZIP code mapping file into a DataFrame
 zip_mapping_df = pd.read_excel(zip_mapping_file)
@@ -51,5 +51,5 @@ for row, cell in enumerate(worksheet['D'][1:]):
         worksheet[f'P{row + 2}'] = city_state[1] # State
 
 # Save the modified Excel file
-output_path = r"C:\MAC-009 Test\MAC-009 Files\Modified_Lot_Cards_Trilagen.xlsx"
+output_path = r"C:\MAC-009 Test\MAC-009 Files\AddressExtraction\Working Files\Modified_Lot_Cards_Trilagen.xlsx"
 workbook.save(filename=output_path)
