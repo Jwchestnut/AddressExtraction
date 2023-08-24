@@ -1,18 +1,18 @@
 # AddressExtraction
 Identify a USA address within other text in an Excel field. Copy to specific address columns.
 
-## address_extractor.py (Version 1.0)
+## address_extractor.py (Version 1.1)
 ### Purpose
-This script is designed to extract street addresses from a given line of text. It is a crucial part of the address extraction project, specifically targeting USA addresses within Excel fields.
+This script is designed to extract street addresses from a given line of text. It is crucial to the address extraction project, explicitly targeting USA addresses within Excel fields.
 
 ### Functionality
-By utilizing a list of common street indicators, the script identifies and extracts the full address. The main function, `extract_address`, takes a line of text and returns the extracted address or a "No match found" message if no address is detected.
+The script identifies and extracts the full address by utilizing a list of common street indicators from the `street_types_v1.0.csv` file. The primary function, `extract_address`, takes a line of text and returns the extracted address or a "No match found" message if no address is detected.
 
 ### Unique Features
-The script employs a manual approach, allowing for flexibility in handling various address formats. It can be easily extended or modified to accommodate specific needs.
+The script employs a manual approach, allowing for flexibility in handling various address formats. It can be easily extended or modified to accommodate specific needs. The recent update includes the integration of street indicators from a CSV file, enhancing flexibility and maintainability.
 
 ### Considerations
-As this is the initial version (1.0), future updates may include optimizations, support for additional address formats, and integration with other components of the project.
+As this is version 1.1, future updates may include optimizations, support for additional address formats, and integration with other components of the project.
 
 ## Updated_Lot_Cards_Script.py (Version 1.0)
 ### Purpose
@@ -29,5 +29,6 @@ The script integrates with `address_extractor.py` and handles Excel workbook ope
 
 ### Considerations
 As this is the initial version (1.0), future updates may include optimizations, support for additional Excel formats, and integration with other components of the project.
+```
 
-
+This updated README reflects the changes made to `address_extractor.py`, specifically the integration of street indicators from the `street_types_v1.0.csv` file, and updates the version to 1.1. It provides a clear and comprehensive overview of the project, the purpose of each script, and the unique features and considerations associated with them.
