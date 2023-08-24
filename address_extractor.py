@@ -1,15 +1,40 @@
 # Version: 1.1
 # Description: Initial version of the script for updating lot cards with extracted addresses, ZIP codes, cities, and states.
+feature/zip_code
+# List of street indicators
+street_indicators = ["Road", "Rd., "Street", "St.", "Court", "Ct.", "Circle", "Cir.", "Avenue", "Ave.", "Boulevard", "Blvd.", "Drive", "Dr.", "Lane", "Ln.", "Place", "Pl.", "Terrace", "Ter.", "Highway", "Hwy.", "Parkway", "Pkwy.", "Alley", "Aly.", "Freeway", "Fwy.", "Expressway", "Expy.", "Trail", "Trl.", "Way", "Way", "Square", "Sq.", "Loop", "Loop"]
+
+# Function to extract the address using the manual approach
+def extract_address(line):
+    # Loop through the street indicators to find a match
+    for indicator in street_indicators:
+        # Find the position of the street indicator
+        indicator_pos = line.find(indicator)
+        if indicator_pos != -1:
+            # Extract everything to the left of the street indicator
+            left_part = line[:indicator_pos]
+            # Split the left part into words and reverse the order
+            words = left_part.split()[::-1]
+            # Initialize the address with the street indicator
+            address = [indicator]
+            # Loop through the words, adding them to the address until a word containing only digits is found
+            for word in words:
+                if word.isdigit():
+                    # Add the word containing only digits and stop
+                    address.append(word)
+                    break
+                # Add other words to the address
+                address.append(word)
+            # Reverse the address to the original order and join it into a string
+            address_str = " ".join(address[::-1])
+            return address_str
+    return "No match found"
+
+# Rest of the code for updating lot cards with extracted addresses, ZIP codes, cities, and states
 from openpyxl import load_workbook
 import re
 import pandas as pd
-import sys
 
-# Add the path to the directory where address_extractor.py is located
-path_to_address_extractor = r"C:\MAC-009 Test\MAC-009 Files\AddressExtraction"
-sys.path.append(path_to_address_extractor)
-
-from address_extractor import extract_address
 
 # Define the file path for the target Excel file
 file_path = r"C:\MAC-009 Test\MAC-009 Files\AddressExtraction\Working Files\Lot Cards - Trilagen.xlsx"
@@ -31,25 +56,19 @@ worksheet = workbook.active
 
 # Iterate through the 'Original_Address' column (column D, skipping the header row)
 for row, cell in enumerate(worksheet['D'][1:]):
-    # Extract the street address using the imported function
+feature/zip_code
+    # Extract the street address using the extract_address function
+
     address = extract_address(str(cell.value))
     
     # Write the street address to the corresponding 'Street' cell in column M
     worksheet[f'M{row + 2}'] = address
 
-    # Extract the ZIP code using regex (ignoring strings that start with "#")
-    zip_code_match = re.search(r' \d{5}\b', str(cell.value))
-    if zip_code_match and not str(cell.value).startswith("#"):
-        zip_code = zip_code_match.group(0).strip()
-        
-        # Write ZIP code to 'Zip' cell in column N
-        worksheet[f'N{row + 2}'] = zip_code
-        
-        # Query city and state using ZIP code and write to 'City' and 'State' cells in columns O and P
-        city_state = zip_mapping.get(int(zip_code), 'Not found').split(", ")
-        worksheet[f'O{row + 2}'] = city_state[0] # City
-        worksheet[f'P{row + 2}'] = city_state[1] # State
+feature/zip_code
+    # Continue with the rest of the code as previously described...
 
 # Save the modified Excel file
-output_path = r"C:\MAC-009 Test\MAC-009 Files\AddressExtraction\Modified_Lot_Cards_Trilagen.xlsx"
+output_path = r"C:\MAC-009 Test\MAC-009 Files\AddressExtraction\Working Files\Modified_Lot_Cards_Trilagen.xlsx"
 workbook.save(filename=output_path)
+
+
