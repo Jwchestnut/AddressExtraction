@@ -13,7 +13,7 @@ sys.path.append(path_to_address_extractor)
 from address_extractor import extract_address
 
 # Define the file path for the target Excel file
-file_path = r"C:\MAC-009 Test\MAC-009 Files\AddressExtraction\Working Files\lotcards-trilagen.csv"
+file_path = r"C:\MAC-009 Test\MAC-009 Files\AddressExtraction\Working Files\lotcards.csv"
 
 # Path to the ZIP code mapping file
 zip_mapping_file = r"C:\MAC-009 Test\MAC-009 Files\AddressExtraction\Working Files\ZIP_Locale_Detail.xls"
