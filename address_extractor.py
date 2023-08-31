@@ -37,7 +37,7 @@ import pandas as pd
 
 
 # Define the file path for the target Excel file
-file_path = r"C:\MAC-009 Test\MAC-009 Files\AddressExtraction\Working Files\lotcards-trilagen.csv"
+file_path = r"C:\MAC-009 Test\MAC-009 Files\AddressExtraction\Working Files\lotcards.csv"
 
 # Path to the ZIP code mapping file
 zip_mapping_file = r"C:\MAC-009 Test\MAC-009 Files\AddressExtraction\Working Files\ZIP_Locale_Detail.xls"
